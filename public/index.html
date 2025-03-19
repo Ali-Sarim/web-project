@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>Book ShowCase</title>
+    <style>
+      
+          body {
+           
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: 'Times New Roman', Times, serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header, footer {
+            background-color: rgb(57, 58, 57);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        main {
+            flex-grow: 1;
+            background: linear-gradient(135deg, 
+                rgba(171, 63, 117, 0.4), 
+                rgba(189, 65, 193, 0.5), 
+                rgba(28, 174, 172, 0.4), 
+                rgba(23, 174, 191, 0.5), 
+                rgba(0, 191, 255, 0.4), 
+                rgba(94, 22, 183, 0.5));
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+        }
+        .flip-container {
+            display: flex;
+            justify-content: center;
+            gap: 8rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .card {
+            width: 18rem;
+            height: 25rem;
+            perspective: 1000px;
+            margin: 10px;
+            border: none;
+            background: transparent;
+        }
+        .inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            background: transparent;
+        }
+        .card:hover .inner {
+            transform: rotateY(180deg);
+        }
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .front img {
+            background: transparent;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .back {
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            background: rgba(40, 40, 40, 0.5);
+            color: white;
+        }
+        .title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: center;
+            transform: scaleY(1.3);
+            letter-spacing: 1.5px;
+        }
+        .back-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #ffd700;
+            cursor: pointer;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 25% 50%; }
+            50% { background-position: 75% 50%; }
+            75% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .modal .modal-dialog {
+            max-width: 50%;
+            width: 75%;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            padding: 0.5rem;
+            margin: 0.5rem;
+        }
+        .modal-body  {
+            flex-grow: 1;
+            background: linear-gradient(135deg, 
+                rgba(171, 63, 117, 0.4), 
+                rgba(189, 65, 193, 0.5), 
+                rgba(28, 174, 172, 0.4), 
+                rgba(23, 174, 191, 0.5), 
+                rgba(0, 191, 255, 0.4), 
+                rgba(94, 22, 183, 0.5));
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+
+
+        }
+        .modal-footer{
+            flex-grow: 1;
+            background: linear-gradient(135deg, 
+                rgba(171, 63, 117, 0.4), 
+                rgba(189, 65, 193, 0.5), 
+                rgba(28, 174, 172, 0.4), 
+                rgba(23, 174, 191, 0.5), 
+                rgba(0, 191, 255, 0.4), 
+                rgba(94, 22, 183, 0.5));
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+
+        }
+    </style>
+</head>
+<body>
+    <header class="fs-2 fw-semibold">Welcome To Book ShowCase</header>
+    <a href="#home" class="text-decoration-none">
+        <div class="bg-black fs-4 p-2 text-white text-center">Home</div>
+    </a>
+    <main id="home">
+        <div class="fw-bold p-3 fs-3 text-center">Explore Books</div>
+        <div class="flip-container">
+            <div class="card">
+                <div class="inner">
+                    <div class="front">
+                        <img src="/public/img/lifeofpibr.webp" alt="Life of Pi">
+                    </div>
+                    <div class="back">
+                        <div class="title">LIFE OF PI</div>
+                        <div class="back-content" data-bs-target="#bookdetails1" data-bs-toggle="modal">Click For More Details</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="inner">
+                    <div class="front">
+                        <img src="/public/img/61215372.jpg" alt="Marvel">
+                    </div>
+                    <div class="back">
+                        <div class="title">MARVELS</div>
+                        <div class="back-content" data-bs-target="#bookdetails2" data-bs-toggle="modal">Click For More Details</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="inner">
+                    <div class="front">
+                        <img src="/public/img/harry.jpeg" alt="Harry Potter">
+                    </div>
+                    <div class="back">
+                        <div class="title">HARRY POTTER</div>
+                        <div class="back-content" data-bs-target="#bookdetails3" data-bs-toggle="modal">Click For More Details</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="bi bi-c-circle fs-5"> Book ShowCase | All rights reserved</div>
+    </footer>
+    <div class="modal fade" id="bookdetails1">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content rounded-3 shadow-lg">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title">Book Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+            
+                <div class="modal-body p-4">
+                    <!-- Book-1 Image -->
+                    <div class="text-center mb-4">
+                        <img src="/public/img/lifeofpibr.webp" alt="Image Not Found" class="img-fluid w-50 rounded shadow-sm">
+                    </div>
+            
+                    <!-- Book-1 Details -->
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#overview">Overview</a>
+                        <div class="collapse mt-2" id="overview">
+                            <p class="text-muted">
+                                <em>Life of Pi</em> is a Canadian philosophical novel by <strong>Yann Martel published in 2001.</strong> The protagonist is Piscine Molitor "Pi" Patel, an Indian boy from Pondicherry, who explores issues of spirituality and metaphysics from an early age.
+                            </p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#publish">Publishing Details</a>
+                        <div class="collapse mt-2" id="publish">
+                            <p class="text-muted">Originally published on 11 September 2001 in Canada.</p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#author">Author</a>
+                        <div class="collapse mt-2" id="author">
+                            <p class="text-muted">Yann Martel</p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#genre">Genre</a>
+                        <div class="collapse mt-2" id="genre">
+                            <p class="text-muted"> Novel, Adventure fiction, Psychological Fiction</p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#purchase-links">Purchase Links</a>
+                        <div class="collapse mt-2" id="purchase-links">
+                            <ul class="list-unstyled">
+                                <li><a href="https://www.amazon.in/Life-Pi-Booker-Prize-Winner/dp/0857865536/ref=sr_1_1?crid=ROS0X9MFGBX3&dib=eyJ2IjoiMSJ9.d7r8US2oTVypp30jwBcA5fy8zgs4AduIMsW-V015XIlm9hlbwkBglOn1pAkIB6kHmSQcuMRqPt2QsUtFOReycbB_F6nSb5G49VKGk9oLyTNa68QFo7bGZytbh5NZL6p81a2N9ScjZxWk4WCmu5YsSsGFSLHOmLzP0mCNSgTkaBma9pQksxbFXhkl_MiyHcY3yew1Fk1QkuRvDJFUgKK17tpkWh-mWNzRYSR7djNeo5U.ObS5KD7q_SmP-ZV8v5m-3v453QJZ3QHnWDhvTDLznrE&dib_tag=se&keywords=life+of+pi&qid=1742382858&s=books&sprefix=lifeof+%2Cstripbooks%2C264&sr=1-1"target="_blank" class="text-decoration-none text-success">Amazon</a></li>
+                                <li><a href="https://www.flipkart.com/life-of-pi/p/itmfd9j44psp73sg?pid=9789351223238&lid=LSTBOK9789351223238KEOAMF&marketplace=FLIPKART&q=life+of+pi&store=bks&srno=s_1_11&otracker=AS_QueryStore_OrganicAutoSuggest_1_8_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_8_na_na_na&fm=organic&iid=a30ea58b-0ab2-46f8-abd7-44d89f6b5ccc.9789351223238.SEARCH&ppt=pp&ppn=pp&ssid=0rjzsluzjk0000001742382912870&qH=350ad943a182578a" target="_blank" class="text-decoration-none text-success">Flipkart</a></li>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <!-- Feedback Form -->
+                    <hr class="my-4">
+                    <h5 class="text-center text-dark">Give Your Feedback</h5>
+                    <form class="mt-3">
+                        <div class="mb-3">
+                            <label for="name" class="form-label fw-medium">Your Name</label>
+                            <input type="text" class="form-control rounded-3" id="name" placeholder="Enter your name" required>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-medium">Your Email</label>
+                            <input type="email" class="form-control rounded-3" id="email" placeholder="Enter your email" required>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label class="form-label fw-medium">Rating</label>
+                            <select class="form-select rounded-3" required>
+                                <option value="" selected disabled>Choose a rating</option>
+                                <option value="1">1 - Poor</option>
+                                <option value="2">2 - Fair</option>
+                                <option value="3">3 - Good</option>
+                                <option value="4">4 - Very Good</option>
+                                <option value="5">5 - Excellent</option>
+                            </select>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label for="comments" class="form-label fw-medium">Your Feedback</label>
+                            <textarea class="form-control rounded-3" id="comments" rows="3" placeholder="Write your feedback here..." required></textarea>
+                        </div>
+            
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            
+                <!-- Modal Footer -->
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>                           
+        </div>
+    </div>
+    <div class="modal fade" id="bookdetails2">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content rounded-3 shadow-lg">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title">Book Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+            
+                <div class="modal-body p-4">
+                    <!-- Book-2 Image -->
+                    <div class="text-center mb-4">
+                        <img src="/public/img/61215372.jpg" alt="Image Not Found" class="img-fluid w-50 rounded shadow-sm">
+                    </div>
+            
+                    <!-- Book-2 Details -->
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#overview">Overview</a>
+                        <div class="collapse mt-2" id="overview">
+                            <p class="text-muted">
+                                <em>The Two Towers</em>,first published in 1954, is the second volume of <strong>J.R.R. Tolkien's</strong> high fantasy novel <em>The Lord of the Rings.</em> It is preceded by <em>The Fellowship of the Ring</em> and followed by <em>The Return of the King</em>.
+                            </p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#publish">Publishing Details</a>
+                        <div class="collapse mt-2" id="publish">
+                            <p class="text-muted">Originally published on 11 November 1954 in the United Kingdom.</p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#author">Author</a>
+                        <div class="collapse mt-2" id="author">
+                            <p class="text-muted">John Ronald Reuel Tolkien</p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#genre">Genre</a>
+                        <div class="collapse mt-2" id="genre">
+                            <p class="text-muted">Action, Fantasy Fiction</p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#purchase-links">Purchase Links</a>
+                        <div class="collapse mt-2" id="purchase-links">
+                            <ul class="list-unstyled">
+                                <li><a href="https://www.amazon.in/Two-Towers-Lord-Rings/dp/0618574956" target="_blank" class="text-decoration-none text-success">Amazon</a></li>
+                                <li><a href="https://www.flipkart.com/the-two-towers/p/itmfc7pjfyrzjnjk" target="_blank" class="text-decoration-none text-success">Flipkart</a></li>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <!-- Feedback Form -->
+                    <hr class="my-4">
+                    <h5 class="text-center text-dark">Give Your Feedback</h5>
+                    <form class="mt-3">
+                        <div class="mb-3">
+                            <label for="name" class="form-label fw-medium">Your Name</label>
+                            <input type="text" class="form-control rounded-3" id="name" placeholder="Enter your name" required>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-medium">Your Email</label>
+                            <input type="email" class="form-control rounded-3" id="email" placeholder="Enter your email" required>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label class="form-label fw-medium">Rating</label>
+                            <select class="form-select rounded-3" required>
+                                <option value="" selected disabled>Choose a rating</option>
+                                <option value="1">1 - Poor</option>
+                                <option value="2">2 - Fair</option>
+                                <option value="3">3 - Good</option>
+                                <option value="4">4 - Very Good</option>
+                                <option value="5">5 - Excellent</option>
+                            </select>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label for="comments" class="form-label fw-medium">Your Feedback</label>
+                            <textarea class="form-control rounded-3" id="comments" rows="3" placeholder="Write your feedback here..." required></textarea>
+                        </div>
+            
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            
+                <!-- Modal Footer -->
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>                           
+        </div>
+    </div>
+    <div class="modal fade" id="bookdetails3">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content rounded-3 shadow-lg">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title">Book Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+            
+                <div class="modal-body p-4">
+                    <!-- Book-3 Image -->
+                    <div class="text-center mb-4">
+                        <img src="/public/img/harry.jpeg" alt="Image Not Found" class="img-fluid w-50 rounded shadow-sm">
+                    </div>
+            
+                    <!-- Book-3 Details -->
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#overview">Overview</a>
+                        <div class="collapse mt-2" id="overview">
+                            <p class="text-muted">
+                                <em>Harry Potter</em> It is the first novel in the Harry Potter series and was Rowling's debut novel. 
+                                by <strong>J. K. Rowling</strong> Is was published in 1997. 
+                            </p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#publish">Publishing Details</a>
+                        <div class="collapse mt-2" id="publish">
+                            <p class="text-muted">Originally published on 26 June 1997 in the United Kingdom.</p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#author">Author</a>
+                        <div class="collapse mt-2" id="author">
+                            <p class="text-muted">J. K. Rowling</p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#genre">Genre</a>
+                        <div class="collapse mt-2" id="genre">
+                            <p class="text-muted">Novel, Fantasy Fiction, Children's literature, High fantasy</p>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none text-primary fs-5 fw-bold d-block" data-bs-toggle="collapse" data-bs-target="#purchase-links">Purchase Links</a>
+                        <div class="collapse mt-2" id="purchase-links">
+                            <ul class="list-unstyled">
+                                <li><a href="https://www.amazon.in/Harry-Potter-Prisoner-Azkaban/dp/1408855674/ref=sr_1_4?dib=eyJ2IjoiMSJ9.unjJe6ynanBuiIduQ0xcKFsIOuOjC9dI_si56DhCSxdK0SnXweTEI-nATw5As-KFG_RaXuIX1yRssbDbMSqHS-cRbJGu3ax6CLTi85AjP6kW5UYJCwRpImErt_D-wm6ZraA2lqOJqzKnvAc4uwK6-QJy1qoj3ahRmApQ5RZX7vP3VMhI_lOpG8UR7pq4SNSoKK3Gxby9EsKB7tXTCc3mw_--wQstYetud_135xQL7BE.bVfpeGWBBVDrAcwLbW6ycdmR9hJKjqnbMJwJ1pefXeM&dib_tag=se&qid=1742382684&refinements=p_28%3Aharry+potter&s=books&sr=1-4" target="_blank" class="text-decoration-none text-success">Amazon</a></li>
+                                <li><a href="https://www.flipkart.com/harry-potter-philosopher-s-stone-english-paperback-j-k-rowling/p/itm389e3bcc425e5" target="_blank" class="text-decoration-none text-success">Flipkart</a></li>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <!-- Feedback Form -->
+                    <hr class="my-4">
+                    <h5 class="text-center text-dark">Give Your Feedback</h5>
+                    <form class="mt-3">
+                        <div class="mb-3">
+                            <label for="name" class="form-label fw-medium">Your Name</label>
+                            <input type="text" class="form-control rounded-3" id="name" placeholder="Enter your name" required>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-medium">Your Email</label>
+                            <input type="email" class="form-control rounded-3" id="email" placeholder="Enter your email" required>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label class="form-label fw-medium">Rating</label>
+                            <select class="form-select rounded-3" required>
+                                <option value="" selected disabled>Choose a rating</option>
+                                <option value="1">1 - Poor</option>
+                                <option value="2">2 - Fair</option>
+                                <option value="3">3 - Good</option>
+                                <option value="4">4 - Very Good</option>
+                                <option value="5">5 - Excellent</option>
+                            </select>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label for="comments" class="form-label fw-medium">Your Feedback</label>
+                            <textarea class="form-control rounded-3" id="comments" rows="3" placeholder="Write your feedback here..." required></textarea>
+                        </div>
+            
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            
+                <!-- Modal Footer -->
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>          
+                             
+        </div>
+    </div>
+</body>
+</html>
